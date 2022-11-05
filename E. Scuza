@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    
+    while(t--){
+        int n,q;
+        cin>>n>>q;
+        vector<int> ladder(n,0);
+        vector<pair<int,int>> jump(q,{0,0});
+        
+        for(int i=0;i<n;i++){
+            cin>>ladder[i];
+        }
+        
+        for(int j=0;j<q;j++){
+            cin>>jump[j].first;
+            jump[j].second = j;
+        }
+        
+        sort(jump.begin(),jump.end());
+        vector<pair<long long,int>> ans;
+        vector<long long> res(q,0);
+        for(int i=0;i<q;i++){
+            int step = jump[i].first;
+            int idx = 0;
+            long long sum = 0;
+            if(i-1 >= 0){
+                idx = ans[i-1].second + 1;
+                sum = ans[i-1].first;
+            }
+            
+            int j;
+            for(j=idx;j<n;j++){
+                if(step >= ladder[j]){
+                    sum += ladder[j];
+                }
+                else{
+                    break;
+                }
+            }
+            
+            ans.push_back({sum,j-1});
+            res[jump[i].second] = sum;
+        }
+        
+        for(int i=0;i<q;i++){
+            cout<<res[i]<<" ";
+        }
+        cout<<endl;
+    }
+    
+    return 0;
+}
