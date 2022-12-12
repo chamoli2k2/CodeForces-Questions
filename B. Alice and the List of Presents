@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long mod = 1e9 + 7;
+long long power(long long a,long long b){
+    if(b == 0){
+        return 1;
+    }
+
+    long long halfAnswer = power(a,b/2);
+
+    if(b & 1){
+        return (halfAnswer % mod * halfAnswer % mod * a % mod) % mod;
+    }
+
+    return (halfAnswer % mod * halfAnswer % mod) % mod;
+}
+int main(){
+    long long n, m ;
+    cin>>n>>m;
+
+    long long k = power(2,m) - 1;
+    long long ans = power(k,n);
+
+    cout<<ans<<endl;
+    return 0;
+}
