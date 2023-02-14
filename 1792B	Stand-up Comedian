@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long int
+#define f(i,n) for(int i=0;i<n;i++)
+#define dbg(x) cout<<#x<<"= "<<x<<endl
+
+int32_t main(){
+    int t = 1;
+    cin>>t;
+
+    while(t--){
+        vector<int> arr(4,0);
+
+        for(int i=0;i<4;i++) cin>>arr[i];
+        
+        int ans;
+        if(arr[0] == 0){
+            if(arr[1] || arr[2] || arr[3]){
+                ans = 1;
+            }
+            else{
+                ans = 0;
+            }
+        }
+        else{
+            if(arr[1] > arr[2]){
+                swap(arr[1],arr[2]);
+            }
+            arr[2] = arr[2] - arr[1];
+
+            ans = arr[0] + 2 * arr[1] + min(arr[0]+1,arr[2]+arr[3]);
+        }
+
+        cout<<ans<<endl;
+    }
+
+    return 0;
+}
